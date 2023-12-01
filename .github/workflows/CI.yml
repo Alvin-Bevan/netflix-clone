@@ -29,6 +29,19 @@ jobs:
           push: true
           tags: alvinbevan/new-image:1
 
+      - name: Check Docker Group Membership
+        run: id -nG
+
+      - name: Add User to Docker Group
+        run: sudo groupadd -f docker
+
+      - name: Add User to Docker Group
+        run: sudo usermod -aG docker $USER
+        if: runner.os == 'Linux'
+
+      - name: Add User to Docker Group
+        run: newgrp docker
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
