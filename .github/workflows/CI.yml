@@ -23,6 +23,7 @@ jobs:
 
       - name: Set up Docker
         uses: docker/setup-docker@v2
+        # Add any additional configuration if required
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
