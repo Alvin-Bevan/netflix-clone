@@ -21,14 +21,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: alvinbevan/new-image:1
-
       - name: Check Docker Group Membership
         run: id -nG
 
@@ -47,6 +39,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: alvinbevan/new-image:1
 
       - name: Deploy to Kubernetes
         run: kubectl apply -f Deployment.yaml
