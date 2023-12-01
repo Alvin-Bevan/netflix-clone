@@ -33,6 +33,16 @@ jobs:
       - name: Add User to Docker Group
         run: newgrp docker
 
+      - name: Restart Docker
+        run: sudo service docker restart
+
+      - name: Check Docker Status
+        run: sudo service docker status
+
+      - name: Start Docker
+        run: sudo service docker start
+
+
       - name: Log in to Docker Hub
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
